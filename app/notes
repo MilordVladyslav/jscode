@@ -1,0 +1,179 @@
+
+<div class="place row-1 col-1">row-1 col-1</div>
+<div class="place row-1 col-2">row-1 col-2</div>
+<div class="place row-1 col-3">row-1 col-3</div>
+<div class="place row-1 col-4">row-1 col-4</div>
+<div class="place row-2 col-1">row-2 col-1</div>
+<div class="place row-2 col-2">row-2 col-2</div>
+<div class="place row-2 col-3">row-2 col-3</div>
+<div class="place row-2 col-4">row-2 col-4</div>
+<div class="place row-3 col-1">row-3 col-1</div>
+<div class="place row-3 col-2">row-3 col-2</div>
+<div class="place row-3 col-3">row-3 col-3</div>
+<div class="place row-3 col-4">row-3 col-4</div>
+<div class="place row-4 col-1">row-4 col-1</div>
+<div class="place row-4 col-2">row-4 col-2</div>
+<div class="place row-4 col-3">row-4 col-3</div>
+<div class="place row-4 col-4">row-4 col-4</div>
+
+        <div class="place row-1 col-1"></div>
+        <div class="place row-1 col-2"></div>
+        <div class="place row-1 col-3"></div>
+        <div class="place row-1 col-4"></div>
+        <div class="place row-2 col-1"></div>
+        <div class="place row-2 col-2"></div>
+        <div class="place row-2 col-3"></div>
+        <div class="place row-2 col-4"></div>
+        <div class="place row-3 col-1"></div>
+        <div class="place row-3 col-2"></div>
+        <div class="place row-3 col-3"></div>
+        <div class="place row-3 col-4"></div>
+        <div class="place row-4 col-1"></div>
+        <div class="place row-4 col-2"></div>
+        <div class="place row-4 col-3"></div>
+        <div class="place row-4 col-4"></div>
+
+
+
+
+            for(var i = 0; i<filteredPlaces.length; i++) {
+        if(filteredPlaces[i][2][4] == parent[1][2][4]) {
+            c(`${filteredPlaces[i][1]} and ${parent[1][2]} ` )
+        }
+    }
+    
+    for(var i = 0; i<parent.length; i++) {
+        for(var j = 0; j<filteredPlaces.length; j++) {
+            if(parent[i][2][4] == filteredPlaces[j][2][4]) {
+                c(`${parent[i][1]}`)
+            }
+        }
+    }
+
+    c(value)
+
+
+    let value = parent[0][1]
+    switch(keyup) {
+        case 'ArrowDown':
+            let columns = parent[0][2][4]
+            c(columns)
+            for(var i = 0; i < filteredPlaces.length; i++) {
+                for(var j = 0; j < parent.length; j++) {
+                    let column = parent[j]
+                    filteredPlaces[i][1][4]
+                }
+            }
+        break
+        case 'ArrowUp':
+            c('ArrowUp')
+        break
+        case 'ArrowLeft':
+            c('ArrowLeft')
+        break 
+        case 'ArrowRight':
+            c('ArrowRight')
+    }
+
+
+
+    // c(parent[0][2][4])
+    // c(filteredPlaces.length)
+    // let value = [];
+    // let column = filteredPlaces[3][2][4]
+
+
+        let filteredPlaces = [] 
+    allPlaces.forEach(element => {
+        filteredPlaces.push(element.classList)
+    });
+
+    // c(filteredPlaces.length)
+
+    for(let j = 0; j<parent.length; j++) {
+        for(let i = 0; i<allPlaces.length; i++) {
+            if(allPlaces[i].classList[2][4] == parent[j][2][4]) {
+                c(`${allPlaces[i].classList[1]} and ${parent[j][2]} ` )
+            }
+        }
+    }
+
+/* 
+
+    for(let j = 0; j<parent.length; j++) {
+        for(let i = 0; i<filteredPlaces.length; i++) {
+            if(filteredPlaces[i][2][4] == parent[j][2][4]) {
+                c(`${filteredPlaces[i][1]} and ${parent[j][2]} ` )
+            }
+        }
+    }
+*/
+
+
+    // let parent = []
+    // digitDivs.forEach(element => {
+    //     parent.push(element.parentNode.classList)
+    // });
+
+    
+
+    //after all
+    // for(const i in digitDivs) {
+    //     digitDivs[i].parentNode.removeChild(digitDivs[i])
+    // }
+    
+        // const max = allPlaces.length / 4;
+
+    // for(const i in digitDivs) {
+    //     c(digitDivs[i].parentNode.classList)
+    // }
+
+    // const app = document.querySelector('#app')
+    // // document.createElement('div').setAttribute('class', 'wow')
+    // // body.appendChild(document.createElement('div').setAttribute('class', 'wow'))
+    // const wow = document.querySelectorAll('class', 'wow')
+    // c(body)
+    
+
+    // vertical
+    // for(const j in parent) {
+    //     c(parent[j])
+        // for(const i in allPlaces) {
+        //     if(allPlaces[i].classList[2][4] == parent[j][2][4]) {
+        //         c(`${allPlaces[i].classList[1]} and ${parent[j][2]} ` )
+        //     }
+        // }
+   // }
+
+
+
+    let endMovement = {
+        firstTime: true,
+        end: false           
+    }
+    for(const i in digitDivs){
+        
+        if(keyup === 'ArrowDown' || keyup === 'ArrowUp' && endMovement.firstTime || endMovement.end) {
+            const current = digitDivs[i].parentNode.classList[1][4]
+            const total = max - current
+            const min = current - 1
+            MovementDirection(keyup, i, total, min);
+            endMovement.firstTime = false
+            endMovement.end = false
+        }else if(keyup === 'ArrowLeft' || keyup === 'ArrowRight' && endMovement.firstTime || endMovement.end) {
+            const current = digitDivs[i].parentNode.classList[2][4]
+            const total = max - current
+            const min = current - 1
+            MovementDirection(keyup, i, total, min);
+            endMovement.firstTime = false
+            endMovement.end = false
+        }
+        
+        setTimeout(() => {
+            endMovement.end = true
+            c('Wow eba ty yovelir!')
+        }, 1000);
+    }
+    
+
+}

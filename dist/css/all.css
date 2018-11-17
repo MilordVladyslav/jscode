@@ -1,0 +1,21 @@
+.app {
+  margin: 20px auto;
+  width: 400px;
+  height: 400px;
+}
+.place {
+  float: left;
+  -webkit-border-radius: 10px;
+          border-radius: 10px;
+  margin: 5px;
+  width: 88px;
+  height: 88px;
+  border: 1px solid green;
+}
+.digit {
+  width: 100%;
+  height: 100%;
+  -webkit-border-radius: 10px;
+          border-radius: 10px;
+  background: yellowgreen;
+}

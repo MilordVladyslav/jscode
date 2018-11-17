@@ -1,0 +1,1 @@
+"use strict";function es6(c){var o=arguments.length>1&&void 0!==arguments[1]?arguments[1]:"Pavlovich";console.log("".concat(c," ").concat(o))}es6("Pavel");
