@@ -35,7 +35,7 @@ function Movement(keyup) {
 
     function MovementDirection(keyup, i, total, min, max) {
         //remove
-        
+        c(keyup)
         switch(keyup) {
             case 'ArrowDown':
                 c(keyup)
@@ -91,9 +91,15 @@ function Movement(keyup) {
 // vertical movements
 // gorizontal movements
 
-window.addEventListener('keyup',(e) => {
-    Movement(e.code) 
+let blya = []
 
+window.addEventListener('keyup',(e) => {
+    blya.push(e.code) 
+    c(blya)
+    Movement(blya[0]) 
+    if(blya.length >= 2) {
+        blya = [];
+    }
 })
 
 
