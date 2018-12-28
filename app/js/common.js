@@ -6,7 +6,7 @@ function appearanceDigitBlock() {
     const digitDiv = document.createElement('div')
     digitDiv.setAttribute('class', 'digit')
     
-    //впервые заюзал рекурсию на практике 
+    
     const GeneratePlace = () =>{
         let putPlace = getRandomPlace(places.length)
         if(places[putPlace].lastChild) { // check if place is placed other digit
@@ -34,7 +34,6 @@ function Movement(keyup) {
 
 
     function MovementDirection(keyup, i, total, min, max) {
-        //remove
         c(keyup)
         switch(keyup) {
             case 'ArrowDown':
@@ -94,12 +93,21 @@ function Movement(keyup) {
 let blya = []
 
 window.addEventListener('keyup',(e) => {
-    blya.push(e.code) 
+
+    blya.push(e.code)
+
+    // blya.push(e.code)
+    //blya.unshift(e.code)
     c(blya)
     Movement(blya[0]) 
     if(blya.length >= 2) {
         blya = [];
     }
+
+    setTimeout(() => {
+        blya = [];
+        c('done')
+    }, 200);
 })
 
 
