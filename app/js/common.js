@@ -1,5 +1,6 @@
 "use strict";
 
+const places = document.querySelectorAll('.place')
 
 function appearanceDigitBlock() {
     const places = document.querySelectorAll('.place')
@@ -23,6 +24,13 @@ function getRandomPlace(placesLength) {
     return Math.floor(Math.random() * (placesLength));
 }
 
+function IsPlaced(places) {
+    if(!place.hasChildNodes()) return true;
+}
+
+// function Isplaced(place) {
+//     if (place.hasChildNodes()) return true
+// }
 
 appearanceDigitBlock()
 appearanceDigitBlock()
@@ -31,6 +39,7 @@ appearanceDigitBlock()
 function Movement(keyup) {
     const digitDivs = Array.from(document.querySelectorAll('.digit'))
     const allPlaces = Array.from(document.querySelectorAll('.place'))
+
 
 
     function MovementDirection(keyup, i, total, min, max) {
@@ -63,6 +72,9 @@ function Movement(keyup) {
 
     }
 
+
+    //Логика ниже.
+
     const max = allPlaces[allPlaces.length -1].classList[1][4]
 
 
@@ -72,13 +84,18 @@ function Movement(keyup) {
 
                 const current = digitDivs[i].parentNode.classList[1][4]
                 const total = max - current
+                //сюда функцию вхуюжить с проверкой
                 const min = current - 1
+
+                
+
                 MovementDirection(keyup, i, total, min)
 
             }else if(keyup === 'ArrowLeft' || keyup === 'ArrowRight'){
                 
                 const current = digitDivs[i].parentNode.classList[2][4]
                 const total = max - current
+                //сюда функцию вхуюжить с проверкой
                 const min = current - 1
                 MovementDirection(keyup, i, total, min)
     
