@@ -7,7 +7,9 @@ function appearanceDigitBlock() {
     digitDiv.setAttribute('class', 'digit')
 
     const GeneratePlace = () => {
-        let putPlace = getRandomPlace(places.length)
+        let randomPlace = getRandomPlace(places.length)
+        digitDiv.id = randomPlace;
+        let putPlace = randomPlace;
         if (places[putPlace].lastChild) { // check if place is placed other digit
             return GeneratePlace()
         } else {
@@ -19,8 +21,7 @@ function appearanceDigitBlock() {
 }
 
 function getRandomPlace(placesLength) {
-    return 0
-    // return Math.floor(Math.random() * (placesLength));
+    return Math.floor(Math.random() * (placesLength));
 }
 
 function IsPlaced(places) {
@@ -31,8 +32,8 @@ function IsPlaced(places) {
 //     if (place.hasChildNodes()) return true
 // }
 
-appearanceDigitBlock()
 // appearanceDigitBlock()
+appearanceDigitBlock()
 
 
 function Movement(keyup) {
@@ -96,17 +97,21 @@ function Movement(keyup) {
             if (places[j - 1].classList[2][4] == parentNodeCol) {
                 c(j)
                 c(places[j - 1])
+                
             
                 if(!places[j - 1].lastChild) {
+                   
+                    // c(digitDivs[0].id)
                     digitDivs[i].classList.remove(`mov-bottom-${total}00`)
                     places[j - 1].appendChild(digitDivs[i])
-                    
+                    c(places[j - 1].lastChild.id + "       HERE        ")
+                    break;
                 }
                 // let digitDiv = digitDivs[i]
                 // places[j].appendChild(digitDiv)
                 // c(digitDivs[i])
                 // c(digitDivs[i].parentNode);
-                break;
+               
             }
 
             // if(places[i].classList[2][4] == parentNodeCol && !places[i].lastChild) {
