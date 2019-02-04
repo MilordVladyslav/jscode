@@ -28,18 +28,15 @@ function IsPlaced(places) {
     if (!place.hasChildNodes()) return true;
 }
 
-// function Isplaced(place) {
-//     if (place.hasChildNodes()) return true
-// }
 
 appearanceDigitBlock()
-appearanceDigitBlock()
-
 appearanceDigitBlock()
 appearanceDigitBlock()
 
 appearanceDigitBlock()
 appearanceDigitBlock()
+appearanceDigitBlock()
+
 
 function Movement(keyup) {
     const digitDivs = Array.from(document.querySelectorAll('.digit'));
@@ -47,15 +44,18 @@ function Movement(keyup) {
     const reverseDigitDivs = digitDivs.reverse();
 
 
-    c(reverseDigitDivs);
+
 
     function MovementDirectionView(keyup, i, total, min, max) {
         // c(keyup)
         switch (keyup) {
             case 'ArrowDown':
                 // c(keyup)
-                digitDivs[i].classList.remove(`mov-top-${min}00`)
-                digitDivs[i].classList.add(`mov-bottom-${total}00`)
+                // if(!digitDivs[i].classList.contains('unmoveable')) {
+                    digitDivs[i].classList.remove(`mov-top-${min}00`)
+                    digitDivs[i].classList.add(`mov-bottom-${total}00`)                    
+                // }
+
                 break;
 
             case 'ArrowUp':
@@ -110,23 +110,62 @@ function Movement(keyup) {
                     // c(places[j - 1].lastChild.id + "       HERE        ")
                     break;
                 }
+                // else {
+                //     digitDivs[i].classList.add('unmoveable');
+                // }
 
             }
 
         }
     }
 
+    function AddChildToTop(i, min) {
+
+        let parentNodeRow = Number(digitDivs[i].parentNode.classList[1][4])
+        let parentNodeCol = Number(digitDivs[i].parentNode.classList[2][4])
+    
+        for ( var j = 0; j < places.length; j++ ) {
+            if (places[j].classList[2][4] == parentNodeCol) {
+                if( !places[j].lastChild || places[j].lastChild.id == digitDivs[i].id ) {
+                    console.log(min)
+                    digitDivs[i].classList.remove(`mov-top-${min}00`)
+                           
+                    places[j].appendChild(digitDivs[i]);
+                    break; 
+                }
+            }
+        }
+
+    }
 
 
     const max = allPlaces[allPlaces.length - 1].classList[1][4]
     const test = allPlaces[0].classList[1]
 
 
-    for (const i in reverseDigitDivs) {
-        c(i);
+    if(keyup === 'ArrowUp') {
 
+        for (const i in digitDivs) {
+            const current = digitDivs[i].parentNode.classList[1][4]
+            // c(current + "@@@@@@@@@@")
+            const total = max - current
+            //сюда функцию  с проверкой
+            const min = current - 1
 
-        if (keyup === 'ArrowDown' || keyup === 'ArrowUp') {
+            setTimeout(() => {
+                AddChildToTop(i, min)
+            }, 100)
+            
+            MovementDirectionView(keyup, i, total, min)
+
+        }
+
+    }
+
+    
+    if(keyup === 'ArrowDown') {
+
+        for (const i in reverseDigitDivs) {
 
             const current = digitDivs[i].parentNode.classList[1][4]
             // c(current + "@@@@@@@@@@")
@@ -136,23 +175,24 @@ function Movement(keyup) {
 
             setTimeout(() => {
                 AddChildToBottom(i, total)
-            }, 200);
+            }, 100);
             
-            MovementDirectionView(keyup, i, total, min)
-            
-        } else if (keyup === 'ArrowLeft' || keyup === 'ArrowRight') {
-
-            const current = digitDivs[i].parentNode.classList[2][4]
-            const total = max - current
-            //сюда функцию с проверкой
-            const min = current - 1
-            // c(`current - ${current}, total - ${total}, max - ${max}, min - ${min}`) 
-            MovementDirectionView(keyup, i, total, min)
-
+            MovementDirectionView(keyup, i, total, min)        
         }
     }
 
+    if (keyup === 'ArrowLeft' || keyup === 'ArrowRight') {
+
+        const current = digitDivs[i].parentNode.classList[2][4]
+        const total = max - current
+        //сюда функцию с проверкой
+        const min = current - 1
+        // c(`current - ${current}, total - ${total}, max - ${max}, min - ${min}`) 
+        MovementDirectionView(keyup, i, total, min)
+
+    }
 }
+
 
 
 let keytrigger = []
@@ -169,9 +209,7 @@ window.addEventListener('keyup', (e) => {
 
     setTimeout(() => {
         keytrigger = [];
-    }, 200);
+    }, 100);
 })
 
 
-
-function c(arg) { console.log(arg) }  
