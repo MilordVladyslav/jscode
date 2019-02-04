@@ -32,15 +32,22 @@ function IsPlaced(places) {
 //     if (place.hasChildNodes()) return true
 // }
 
-// appearanceDigitBlock()
+appearanceDigitBlock()
 appearanceDigitBlock()
 
+appearanceDigitBlock()
+appearanceDigitBlock()
+
+appearanceDigitBlock()
+appearanceDigitBlock()
 
 function Movement(keyup) {
-    const digitDivs = Array.from(document.querySelectorAll('.digit'))
-    const allPlaces = Array.from(document.querySelectorAll('.place'))
+    const digitDivs = Array.from(document.querySelectorAll('.digit'));
+    const allPlaces = Array.from(document.querySelectorAll('.place'));
+    const reverseDigitDivs = digitDivs.reverse();
 
 
+    c(reverseDigitDivs);
 
     function MovementDirectionView(keyup, i, total, min, max) {
         // c(keyup)
@@ -82,79 +89,42 @@ function Movement(keyup) {
     }
     function AddChildToBottom(i, total) {
 
-        // c(total)
-
+    
+    
         let parentNodeRow = Number(digitDivs[i].parentNode.classList[1][4])
         let parentNodeCol = Number(digitDivs[i].parentNode.classList[2][4])
-        // c(parentNodeRow)
-        // c(parentNodeRow.classList[1][4])
-        // c(`${parentNodeRow[1][4]} + ${parentNodeRow[2][4]}`)
-        // && places[i].classList[2][4] == (places[i].classList[2][4] + total)
+
+
         let putPlace = Number(places[i].classList[2][4]) + total - 1;
+
         for (var j = places.length; j > 0; j--) {
-            // c(places[j - 1])
-            //  && !places[i].lastChild && digitDivs[i].parentNode != places[i]
+
             if (places[j - 1].classList[2][4] == parentNodeCol) {
-                c(j)
-                c(places[j - 1])
-                
-            
-                if(!places[j - 1].lastChild) {
-                   
-                    // c(digitDivs[0].id)
+
+                if( !places[j - 1].lastChild || places[j - 1].lastChild.id == digitDivs[i].id ) {
+                    
                     digitDivs[i].classList.remove(`mov-bottom-${total}00`)
                     places[j - 1].appendChild(digitDivs[i])
-                    c(places[j - 1].lastChild.id + "       HERE        ")
+                    // c(places[j - 1].lastChild.id);
+                    // c(digitDivs[i].id);
+                    // c(places[j - 1].lastChild.id + "       HERE        ")
                     break;
                 }
-                // let digitDiv = digitDivs[i]
-                // places[j].appendChild(digitDiv)
-                // c(digitDivs[i])
-                // c(digitDivs[i].parentNode);
-               
+
             }
 
-            // if(places[i].classList[2][4] == parentNodeCol && !places[i].lastChild) {
-            //     c(places[i])
-            // }
-
-            // && places[i].classList[2][4] == (places[i].classList[2][4] + total)
-            // let somevalue = Number(places[i].classList[2][4])
-            // if (places[i].classList[2][4] == parentNodeRow.classList[2][4]) {
-            //     let mumbo = Number(places[i].classList[1][4])
-
-
-            //     c(place[])
-
-            /*                 if(places[i].classList[1][4] == (mumbo + putPlace))  {
-                                c(places[i])
-                            } */
-            // c(putPlace)
-            //  c(places[i])
-
-            // c(`janka ${mumbo + putPlace}`)
-
-
-
-            // places[i].classList[1][4] + putPlace 
-
-            // places[i].classList.appendChild(digitDivs[i])
-            // c(`total ${total}`)
-            // c(`places ${somevalue}`)
-            // c(`put place - ${putPlace}`)
-            // c(places[i].classList[1] + " - WOW WOW WOW")
-            // }
         }
     }
 
-    //Логика ниже.
+
 
     const max = allPlaces[allPlaces.length - 1].classList[1][4]
     const test = allPlaces[0].classList[1]
-    // [1] - row [2] - col
-    // c(test + " - TEST")
 
-    for (const i in digitDivs) {
+
+    for (const i in reverseDigitDivs) {
+        c(i);
+
 
         if (keyup === 'ArrowDown' || keyup === 'ArrowUp') {
 
@@ -164,16 +134,12 @@ function Movement(keyup) {
             //сюда функцию  с проверкой
             const min = current - 1
 
-            // c(`current - ${current}, total - ${total}, max - ${max}, min - ${min}`) 
-
-            // MovementDirectionModel(i)
             setTimeout(() => {
                 AddChildToBottom(i, total)
             }, 200);
             
-
             MovementDirectionView(keyup, i, total, min)
-
+            
         } else if (keyup === 'ArrowLeft' || keyup === 'ArrowRight') {
 
             const current = digitDivs[i].parentNode.classList[2][4]
