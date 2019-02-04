@@ -43,6 +43,10 @@ function Movement(keyup) {
     const allPlaces = Array.from(document.querySelectorAll('.place'));
     const reverseDigitDivs = digitDivs.reverse();
 
+    //короче этот реверс хитро выебаный поменял исходный массив.
+
+
+    console.log(digitDivs[0]);
 
 
 
