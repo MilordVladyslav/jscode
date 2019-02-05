@@ -8,6 +8,7 @@ function appearanceDigitBlock() {
 
     const GeneratePlace = () => {
         let randomPlace = getRandomPlace(places.length)
+        digitDiv.innerText = '2'
         digitDiv.id = randomPlace;
         let putPlace = randomPlace;
         if (places[putPlace].lastChild) { // check if place is placed other digit
@@ -31,22 +32,18 @@ function IsPlaced(places) {
 
 appearanceDigitBlock()
 appearanceDigitBlock()
-appearanceDigitBlock()
-
-appearanceDigitBlock()
-appearanceDigitBlock()
-appearanceDigitBlock()
 
 
 function Movement(keyup) {
     const digitDivs = Array.from(document.querySelectorAll('.digit'));
     const allPlaces = Array.from(document.querySelectorAll('.place'));
-    const reverseDigitDivs = digitDivs.reverse();
+    const reverseDigitDivs = Array.from(document.querySelectorAll('.digit'));
 
-    //короче этот реверс хитро выебаный поменял исходный массив.
+    reverseDigitDivs.reverse();
+    //короче этот реверс хитрічічічо выебаный поменял исходный массив.
 
-
-    console.log(digitDivs[0]);
+    // console.log(reverseDigitDivs[0]);
+    // console.log(digitDivs[0]);
 
 
 
@@ -91,9 +88,9 @@ function Movement(keyup) {
     function RemoveChild(i) {
         digitDivs[i].parentNode.removeChild(digitDivs[i])
     }
+
     function AddChildToBottom(i, total) {
 
-    
     
         let parentNodeRow = Number(digitDivs[i].parentNode.classList[1][4])
         let parentNodeCol = Number(digitDivs[i].parentNode.classList[2][4])
@@ -114,11 +111,34 @@ function Movement(keyup) {
                     // c(places[j - 1].lastChild.id + "       HERE        ")
                     break;
                 }
-                // else {
-                //     digitDivs[i].classList.add('unmoveable');
+
+                if(places[j - 1].lastChild) {
+                    SumValue(digitDivs[i], places[j - 1].lastChild);
+                }
+
+                // if(places[j - 1].lastChild) {
+                //     SumValue (digitDivs[i].innerText, places[j - 1].lastChild.innerText);
                 // }
 
             }
+
+        }
+    }
+
+    function SumValue (digitDiv, objectToSum) {
+        const digitDivValue = Number(digitDiv.innerText);
+        const objectToSumValue = Number(objectToSum.innerText);
+        // const digitDivNode = document.getElementById(`${digitDiv.id + 100}`);
+
+        if(digitDivValue === objectToSumValue ) {
+            let objectToSumDigit = Number(objectToSum.innerText);
+            objectToSumDigit += digitDivValue;
+            let totalSum = digitDivValue + objectToSumValue;
+            objectToSum.innerText = objectToSumDigit;
+            digitDiv.innerText = 'changed';
+            digitDiv.remove();
+            console.log(objectToSum.parentNode);
+            console.log(digitDivNode.parentNode + 'IM HERE!');
 
         }
     }
@@ -137,6 +157,10 @@ function Movement(keyup) {
                     places[j].appendChild(digitDivs[i]);
                     break; 
                 }
+                if(places[j].lastChild) {
+                    SumValue(digitDivs[i], places[j].lastChild);
+                }
+
             }
         }
 
@@ -158,7 +182,7 @@ function Movement(keyup) {
 
             setTimeout(() => {
                 AddChildToTop(i, min)
-            }, 100)
+            }, 80)
             
             MovementDirectionView(keyup, i, total, min)
 
@@ -166,10 +190,45 @@ function Movement(keyup) {
 
     }
 
-    
-    if(keyup === 'ArrowDown') {
+    function AddChildToLeft(i, min) {
+        let parentNodeRow = Number(digitDivs[i].parentNode.classList[1][4])
 
-        for (const i in reverseDigitDivs) {
+        for(let j = 0; j < places.length; j++) {
+            if (places[j].classList[1][4] == parentNodeRow) {
+                if( !places[j].lastChild || places[j].lastChild.id == digitDivs[i].id ) {
+                     digitDivs[i].classList.remove(`mov-left-${min}00`)
+                     places[j].appendChild(digitDivs[i]);
+                     break;
+                }
+                if(places[j].lastChild) {
+                    SumValue(digitDivs[i], places[j].lastChild);
+                }
+
+            }
+        }
+    }
+
+    function AddChildToRight(i, total) {
+        let parentNodeRow = Number(digitDivs[i].parentNode.classList[1][4])
+
+        for(let j = places.length; j > 0; j--) {
+            if (places[j - 1].classList[1][4] == parentNodeRow) {
+                if( !places[j - 1].lastChild || places[j - 1].lastChild.id == digitDivs[i].id ) {
+                    digitDivs[i].classList.remove(`mov-right-${total}00`)
+                    places[j - 1].appendChild(digitDivs[i]);
+                    break;
+                }
+                if(places[j - 1].lastChild) {
+                    SumValue(digitDivs[i], places[j - 1].lastChild);
+                }
+
+            }
+        }
+    }
+
+    if(keyup === 'ArrowDown') {
+        digitDivs.reverse();
+        for (const i in digitDivs) {
 
             const current = digitDivs[i].parentNode.classList[1][4]
             // c(current + "@@@@@@@@@@")
@@ -179,22 +238,37 @@ function Movement(keyup) {
 
             setTimeout(() => {
                 AddChildToBottom(i, total)
-            }, 100);
+            }, 80);
             
             MovementDirectionView(keyup, i, total, min)        
         }
     }
 
-    if (keyup === 'ArrowLeft' || keyup === 'ArrowRight') {
-
-        const current = digitDivs[i].parentNode.classList[2][4]
-        const total = max - current
-        //сюда функцию с проверкой
-        const min = current - 1
-        // c(`current - ${current}, total - ${total}, max - ${max}, min - ${min}`) 
-        MovementDirectionView(keyup, i, total, min)
-
+    if(keyup === 'ArrowLeft') {
+        for (const i in reverseDigitDivs) {
+            const current = digitDivs[i].parentNode.classList[2][4]
+            const total = max - current
+            const min = current - 1
+            setTimeout( () => {
+                AddChildToLeft(i, min)
+            }, 80)
+            MovementDirectionView(keyup, i, total, min);
+        }
     }
+
+    if(keyup === 'ArrowRight') {
+        digitDivs.reverse();
+        for (const i in digitDivs) {
+            const current = digitDivs[i].parentNode.classList[2][4]
+            const total = max - current
+            const min = current - 1
+            setTimeout( () => {
+                AddChildToRight(i, total)
+            }, 80)
+            MovementDirectionView(keyup, i, total, min);
+        }
+    }
+
 }
 
 
@@ -207,6 +281,8 @@ window.addEventListener('keyup', (e) => {
 
     // c(keytrigger)
     Movement(keytrigger[0])
+
+    appearanceDigitBlock()
     if (keytrigger.length >= 2) {
         keytrigger = [];
     }
