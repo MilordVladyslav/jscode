@@ -96,7 +96,7 @@ function Movement(keyup) {
         let parentNodeCol = Number(digitDivs[i].parentNode.classList[2][4])
 
 
-        let putPlace = Number(places[i].classList[2][4]) + total - 1;
+        // let putPlace = Number(places[i].classList[2][4]) + total - 1;
 
         for (var j = places.length; j > 0; j--) {
 
@@ -135,10 +135,8 @@ function Movement(keyup) {
             objectToSumDigit += digitDivValue;
             let totalSum = digitDivValue + objectToSumValue;
             objectToSum.innerText = objectToSumDigit;
-            digitDiv.innerText = 'changed';
+            // digitDiv.innerText = 'changed';
             digitDiv.remove();
-            console.log(objectToSum.parentNode);
-            console.log(digitDivNode.parentNode + 'IM HERE!');
 
         }
     }
@@ -282,7 +280,7 @@ window.addEventListener('keyup', (e) => {
     // c(keytrigger)
     Movement(keytrigger[0])
 
-    appearanceDigitBlock()
+    // appearanceDigitBlock()
     if (keytrigger.length >= 2) {
         keytrigger = [];
     }
